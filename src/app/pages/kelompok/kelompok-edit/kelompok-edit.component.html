@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-lg-6">
+    <nb-card>
+      <nb-card-body>
+      <h1 id="title" class="title">Edit Data</h1>
+
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+          <div class="form-control-group">
+              <label class="label" for="input-name">Kode Kelompok:</label>
+              <input type="text"
+                  nbInput
+                  fullWidth
+                  placeholder="Kode Kelompok"
+                  formControlName="kode_kelompok"
+
+                  >
+          </div>
+
+          <div class="form-control-group">
+              <label class="label" for="input-email">Nama Kelompok:</label>
+              <input type="text"
+                  nbInput
+                  fullWidth
+                  placeholder="Nama Kelompok"
+                  formControlName="nama_kelompok"
+                  >
+          </div>
+         <br /><br />
+
+          <button nbButton
+                fullWidth
+                status="primary"
+                size="large"
+                >
+          Simpan
+        </button>
+      </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

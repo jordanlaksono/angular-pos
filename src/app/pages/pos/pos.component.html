@@ -1,0 +1,222 @@
+<nb-layout>
+  <nb-layout-header></nb-layout-header>
+  <nb-layout-column>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row show-grid">
+          <div class="col-md-7">
+            <nb-card>
+              <nb-card-header>
+
+                  <input type="text" nbInput style="width:100%;max-width: 44rem;" (keypress)="cariOnInput($event)" [(ngModel)]="textCari" placeholder="Cari...">
+
+              </nb-card-header>
+            </nb-card>
+
+            <div class="row show-grid"  *ngIf="dataBarangUi">
+              <div class="col-md-4"  *ngFor="let b of dataBarangUi; let i = index;">
+                <nb-card [style.background]="b.stok > 0? '#f1f6ff' : '#fbd9d7'" [style.pointerEvents]="b.stok > 0? 'unset' : 'none'" class="card-barang" (click)="tambahBeli(i)">
+                  <nb-card-body>
+                    <div class="c-text">
+											<div style="font-size: 12px;"><b>{{b.kode_barcode_varian}}</b></div>
+											<div><b>{{b.nama_barang}}</b></div>
+                      <div style="text-align: right;"><b>{{b.kode_satuan.nama_satuan}}</b></div>
+                      <div style="text-align: right;"><b>{{b.harga_jual | currency:'Rp. ':'symbol':'.0'}}</b></div>
+                    </div>
+                    <!-- <div class="c-harga">
+											<span class="c-primary" style="text-align: right;"><b>{{b.harga_jual | currency:'Rp. ':'symbol':'.0'}},-</b></span> ({{b.stok > 0? b.stok : '0'}})
+										</div> -->
+                  </nb-card-body>
+                </nb-card>
+              </div>
+            </div>
+            <div *ngIf="!dataBarangUi" class="progress-loading">
+              <div class="progress">
+                  <div class="indeterminate"></div>
+              </div>
+              <p>Fetching data...</p>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div id="content_right_wrapper">
+              <div id="content_right">
+                <div class="row" id="div_member_wrapper">
+                  <div class="col-xs-12 col-sm-12" id="div_kode_penjualan">
+                    <label>PJW25062020-WNI-0001</label>
+                  </div>
+                  <div class="col-xs-12 col-sm-12" id="div_member_content">
+                    <div class="" id="div_member_image"></div>
+                    <div class="" id="div_member_desc"></div>
+                    <input type="hidden" value="" id="penjualan_idpelanggan">
+                  </div>
+                </div>
+                <nb-tabset fullWidth>
+                  <nb-tab tabTitle="BARANG">
+                    <div class="row default-skin" id="div_cart_wrapper" style="height: 368px;" *ngIf="beliBarangUi.length <= 0">
+                      <div class="" id="div_cart_empty" style="">
+                        Keranjang Belanja saat ini masih kosong.
+                      </div>
+
+                    </div>
+                    <div  *ngIf="beliBarangUi.length > 0">
+                    <div  *ngFor="let bb of beliBarangUi; let ik = index;">
+                    <nb-card col-12 >
+                      <nb-card-body  *ngFor="let bbb of bb?.barang; let i = index;">
+                        <div class="kel-barang">
+                        <div style="flex: 1;"><b>{{bbb.nama_barang}}</b></div>
+                        <div class="c-jumlah">
+                          <div class="add-min" (click)="kurangJumlah(ik, bbb)">-</div>
+                          <input  class="ion-input" type="number" [(ngModel)]="bbb.jumlah" (change)="changeJumlah(ik, bbb)" >
+                          <input type="hidden" [(ngModel)]="bbb.stok" >
+                          <div class="add-min" (click)="tambahJumlah(ik, bbb)">+</div>
+                          <div class="hapus" (click)="hapusBarang(ik, i)"><nb-icon icon="trash-2-outline"></nb-icon></div>
+                        </div>
+                       </div>
+                      </nb-card-body>
+                      <nb-card-footer>
+                        <div style="display: flex; font-size: 9pt;">
+                          <div style="flex: 1;">Harga Satuan </div>
+                          <!-- <div style="margin-left: 10px; display: flex; align-items: center;">
+                            <span style="text-decoration: line-through;">{{bb.harga_asli }},-</span>
+                          </div> -->
+                          <b class="c-primary" style="margin-left: 10px;">{{bb?.harga_jual}},-</b>
+                        </div>
+                        <div style="display: flex;">
+                          <b style="flex: 1;">Sub Total</b>
+                          <div style="margin-left: 10px; display: flex; align-items: center;">
+                            <b class="c-primary" style="margin-left: 10px;">{{bb?.sub_total | currency:'Rp. ':'symbol':'.0'}},-</b>
+                          </div>
+                        </div>
+                      </nb-card-footer>
+                    </nb-card>
+                    </div>
+                  </div>
+                  </nb-tab>
+                  <nb-tab tabTitle="INFO NOTA">
+
+                        <nb-card size="medium">
+                          <nb-card-header>
+                            INFO NOTA
+                          </nb-card-header>
+                          <nb-card-body>
+                            <div class="form-horizontal">
+                                <div class="form-group row">
+                                  <label for="inputEmail3" class="label col-sm-3 form-control-label">No Faktur</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" nbInput fullWidth  [(ngModel)]="noNota" [value]="noNota">
+                                  </div>
+                                </div>
+                                <hr />
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="label col-sm-3 form-control-label">Tanggal</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" nbInput fullWidth  [value]="tanggal">
+                                  </div>
+                                </div>
+                                <hr />
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="label col-sm-3 form-control-label">Operator</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" nbInput fullWidth [(ngModel)]="operator" [value]="operator">
+                                    <input type="hidden" nbInput fullWidth [(ngModel)]="operator_id" [value]="operator_id">
+                                  </div>
+                                </div>
+                                <!-- <hr />
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="label col-sm-3 form-control-label">Pengemas</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" nbInput fullWidth  >
+                                  </div>
+                                </div> -->
+                                <hr />
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="label col-sm-3 form-control-label">Nama Pelanggan</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" nbInput fullWidth [value]="pelanggan?.nama_pelanggan? pelanggan?.nama_pelanggan : 'Umum'"  (click)="openModalPelangan()">
+                                  </div>
+                                </div>
+                                <hr />
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="label col-sm-3 form-control-label">Alamat Pelanggan</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" nbInput fullWidth  [value]="pelanggan?.alamat? pelanggan?.alamat : '-'" style="color: #000;" disabled>
+                                  </div>
+                                </div>
+                                <hr />
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="label col-sm-3 form-control-label">No Tlp Pelanggan</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" nbInput fullWidth  [value]="pelanggan?.no_telp? pelanggan.no_telp : '-'" style="color: #000;" disabled>
+                                  </div>
+                                </div>
+                                <hr />
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="label col-sm-3 form-control-label">Catatan</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" nbInput fullWidth  [(ngModel)]="catatan">
+                                  </div>
+                                </div>
+                            </div>
+                          </nb-card-body>
+                        </nb-card>
+                  </nb-tab>
+                </nb-tabset>
+                <nb-card>
+                  <nb-card-body>
+                    <div class="row" id="div_total_wrapper">
+                      <button type="button" class="btn btn-success btn-lg btn-block" style="font-size: 24px;">{{totalBelanja | currency:'Rp. ':'symbol':'.0'}},- </button>
+
+                    </div>
+                    <div class="row" id="div_proses_wrapper">
+                      <div class="col-xs-4" id="div_proses_batal" style="width: 50%;">
+                        <button type="button" (click)="batal()" class="btn btn-warning btn-lg btn-block">Batal </button>
+                      </div>
+                      <div class="col-xs-4" id="div_simpan_sementara" style="width: 50%;">
+                        <button type="button" class="btn btn-info btn-lg btn-block" (click)="simpan()" [disabled]="beliBarangUi.length < 1" [nbSpinner]="simpanLoading" nbSpinnerStatus="danger" nbSpinnerSize="large" nbSpinnerMessage="Loading...."><div *ngIf="!simpanLoading">Simpan </div>
+
+                        </button>
+                      </div>
+
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+
+            </div>
+
+          </div>
+          </div>
+        </div>
+
+    </div>
+    <div [ngStyle]="showModalPelanggan? {'opacity': '1'} :  {'opacity': '0', 'z-index' : '-1'}" class="c-modal-pelanggan">
+      <div class="modal">
+        <div class="title">Pilih Pelanggan</div>
+        <div class="c-cari">
+          <div style="padding-left: 0px;background: #f1f6ff;border-radius: 10px;">
+            <input nbInput fullWidth (change)="cariPelanggan()" [(ngModel)]="textCariPelanggan" placeholder="Cari pelanggan" style="width: 203%;">
+          </div>
+          <!-- <div class="tambah-pelanggan" (click)="modalTambahPelanggan()">
+            <ion-icon name="person-add"></ion-icon>
+          </div> -->
+        </div>
+        <div class="content">
+          <div>
+            <input type="radio" id="P-0" [value]="0" [(ngModel)]="pelangganUi">
+            <label for="P-0">Umum</label>
+          </div>
+          <div *ngFor="let pel of dataPelangganUi">
+            <input type="radio" [id]="'P-' + pel.id_pelanggan" [value]="pel" [(ngModel)]="pelangganUi">
+            <label [for]="'P-' + pel.id_pelanggan">{{pel.kode_pelanggan}} - {{pel.nama_pelanggan}} - <span style="text-transform: uppercase;">{{pel.alamat}}</span></label>
+          </div>
+        </div>
+        <div class="button">
+          <div (click)="modalBatal()">Batal</div>
+          <div (click)="modalPelangganOk()">Ok</div>
+        </div>
+      </div>
+    </div>
+    <div [ngStyle]="showModalPelanggan? {'opacity': '1', 'z-index' : '4'} :  {'opacity': '0', 'z-index' : '-1'}" class="modal-pelanggan-backdrop" (click)="modalBatal()"></div>
+  </nb-layout-column>
+
+ </nb-layout>

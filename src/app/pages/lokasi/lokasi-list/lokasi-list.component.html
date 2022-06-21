@@ -1,0 +1,42 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-body>
+        <span class="edit" [routerLink]="['/pages/lokasi/inputs/']">
+          <button nbButton>Tambah</button>
+        </span><br /><br />
+        <nb-alert status="danger" *ngIf="Lokasi.length <= 0" class="no-data text-center">
+          Data Lokasi Kosong!!!!
+        </nb-alert>
+
+  <!-- Employee list -->
+        <table datatable class="row-border hover" *ngIf="Lokasi.length > 0">
+          <thead >
+            <tr>
+              <th scope="col">Lokasi ID</th>
+              <th scope="col">Kode Lokasi</th>
+              <th scope="col">Nama Lokasi</th>
+              <th scope="col center">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lokasi of Lokasi; let i = index">
+              <th scope="row">{{lokasi._id}}</th>
+              <td>{{lokasi.id_lokasi}}</td>
+              <td>{{lokasi.nama_lokasi}}</td>
+              <td class="text-center edit-block">
+                <span class="edit" [routerLink]="['/pages/lokasi/edit-lokasi/', lokasi._id]">
+                  <button type="button" class="btn btn-success btn-sm">Edit</button>
+                </span>
+                <span class="delete" (click)="removeLokasi(lokasi, i)">
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<h1 id="title" class="title">Register</h1>
+<ng-flash-message></ng-flash-message>
+<form [formGroup]="signupForm" (ngSubmit)="registerUser()" aria-labelledby="title">
+    <div class="form-control-group">
+        <label class="label" for="input-name">Name:</label>
+        <input type="text"
+            nbInput
+            fullWidth
+            placeholder="Name"
+            formControlName="name"
+            >
+    </div>
+
+    <div class="form-control-group">
+        <label class="label" for="input-email">Email address:</label>
+        <input type="text"
+            nbInput
+            fullWidth
+            placeholder="Email address"
+            formControlName="email"
+            >
+    </div>
+    <div class="form-control-group">
+        <label class="label" for="input-email">Password:</label>
+        <input type="password"
+            nbInput
+            fullWidth
+            placeholder="Password"
+            formControlName="password"
+            >
+    </div>
+    <!-- <div class="form-control-group">
+        <label class="label" for="input-email">Repeat password:</label>
+        <input type="password"
+            nbInput
+            fullWidth
+            placeholder="Email address"
+            >
+    </div> -->
+    <button nbButton
+          fullWidth
+          status="primary"
+          size="large"
+          type="submit">
+    Register
+  </button>
+</form>
+<section class="another-action" aria-label="Register">
+    Don't have an account? <a class="text-link" routerLink="../">Sign In</a>
+  </section>

@@ -1,0 +1,42 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-body>
+        <span class="edit" [routerLink]="['/pages/satuan/inputs/']">
+          <button nbButton>Tambah</button>
+        </span><br /><br />
+        <nb-alert status="danger" *ngIf="Satuan.length <= 0" class="no-data text-center">
+          Data Satuan Kosong!!!!
+        </nb-alert>
+
+  <!-- Employee list -->
+        <table datatable class="row-border hover" *ngIf="Satuan.length > 0">
+          <thead >
+            <tr>
+              <th scope="col">Satuan ID</th>
+              <th scope="col">Kode Satuan</th>
+              <th scope="col">Nama Satuan</th>
+              <th scope="col center">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let satuan of Satuan; let i = index">
+              <th scope="row">{{satuan._id}}</th>
+              <td>{{satuan.kode_satuan}}</td>
+              <td>{{satuan.nama_satuan}}</td>
+              <td class="text-center edit-block">
+                <span class="edit" [routerLink]="['/pages/satuan/edit-satuan/', satuan._id]">
+                  <button type="button" class="btn btn-success btn-sm">Edit</button>
+                </span>
+                <span class="delete" (click)="removeSatuan(satuan, i)">
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

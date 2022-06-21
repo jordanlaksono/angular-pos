@@ -1,0 +1,56 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-body>
+        <span class="edit" [routerLink]="['/pages/supplier/inputs/']">
+          <button nbButton>Tambah</button>
+        </span><br /><br />
+        <nb-alert status="danger" *ngIf="Supplier.length <= 0" class="no-data text-center">
+          Data Supplier Kosong!!!!
+        </nb-alert>
+
+  <!-- Employee list -->
+        <table datatable class="row-border hover" *ngIf="Supplier.length > 0">
+          <thead >
+            <tr>
+              <th scope="col">Kode Supplier</th>
+              <th scope="col">Nama Supplier</th>
+              <th scope="col">Alamat</th>
+              <th scope="col">Kota</th>
+              <th scope="col">Kode Pos</th>
+              <th scope="col">Email</th>
+              <th scope="col">No Telp</th>
+              <th scope="col">Atas Nama Rekening</th>
+              <th scope="col">No Rekening</th>
+              <th scope="col">Top</th>
+              <th scope="col center">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let supplier of Supplier; let i = index">
+              <td>{{supplier.kode_supplier}}</td>
+              <td>{{supplier.nama_supplier}}</td>
+              <td>{{supplier.alamat}}</td>
+              <td>{{supplier.kota}}</td>
+              <td>{{supplier.kode_pos}}</td>
+              <td>{{supplier.email}}</td>
+              <td>{{supplier.no_telp_1}}</td>
+              <td>{{supplier.atas_nama_rekening}}</td>
+              <td>{{supplier.no_rekening}}</td>
+              <td>{{supplier.kode_top.nama_top}}</td>
+              <td class="text-center edit-block">
+                <span class="edit" [routerLink]="['/pages/supplier/edit-supplier/', supplier._id]">
+                  <button type="button" class="btn btn-success btn-sm">Edit</button>
+                </span>
+                <span class="delete" (click)="removeSupplier(supplier, i)">
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

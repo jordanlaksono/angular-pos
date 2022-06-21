@@ -1,0 +1,62 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card [nbSpinner]="loading"
+      nbSpinnerStatus="danger"
+      nbSpinnerSize="large"
+      nbSpinnerMessage="Loading.....">
+      <nb-card-body>
+        <span class="edit" [routerLink]="['/pages/pelanggan/inputs/']">
+          <button nbButton>Tambah</button>
+        </span><br /><br />
+        <nb-alert status="danger" *ngIf="Pelanggan.length <= 0" class="no-data text-center">
+          Data Pelanggan Kosong!!!!
+        </nb-alert>
+
+  <!-- Employee list -->
+        <table datatable class="row-border hover" *ngIf="Pelanggan.length > 0">
+          <thead >
+            <tr>
+              <th scope="col">Kode Pelanggan</th>
+              <th scope="col">Nama Pelanggan</th>
+              <th scope="col">Nama Toko</th>
+              <th scope="col">Alamat</th>
+              <th scope="col">No Telp</th>
+              <th scope="col">No Telp 2</th>
+              <th scope="col">No Telp 3</th>
+              <th scope="col">Email</th>
+              <th scope="col">Kota</th>
+              <th scope="col">Kode Pos</th>
+              <th scope="col">TOP</th>
+              <th scope="col center">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pelanggan of Pelanggan; let i = index">
+              <td>{{pelanggan.kode_pelanggan}}</td>
+              <td>{{pelanggan.nama_pelanggan}}</td>
+              <td>{{pelanggan.nama_toko}}</td>
+              <td>{{pelanggan.alamat}}</td>
+              <td>{{pelanggan.no_telp}}</td>
+              <td>{{pelanggan.no_telp2}}</td>
+              <td>{{pelanggan.no_telp3}}</td>
+              <td>{{pelanggan.email}}</td>
+              <td>{{pelanggan.kota}}</td>
+              <td>{{pelanggan.kode_pos}}</td>
+              <td>{{pelanggan.kode_top.nama_top}}</td>
+
+              <td class="text-center edit-block">
+                <span class="edit" [routerLink]="['/pages/pelanggan/edit-pelanggan/', pelanggan._id]">
+                  <button type="button" class="btn btn-success btn-sm">Edit</button>
+                </span>
+                <span class="delete" (click)="removePelanggan(pelanggan, i)">
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

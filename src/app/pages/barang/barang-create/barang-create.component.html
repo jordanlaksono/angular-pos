@@ -1,0 +1,329 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-body>
+
+        <nb-tabset>
+          <nb-tab tabTitle="Informasi Umum">
+            <div class="col-md-12">
+              <div class="row show-grid">
+                <div class="col-md-6">
+
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Barang:</label>
+                    <div class="col-sm-9">
+                      <input type="hidden" nbInput fullWidth  [(ngModel)]="id_uniq" [value]="idUniq">
+                      <input type="text"
+                      nbInput
+                      fullWidth
+                      placeholder="Kode Barang"
+                      [(ngModel)]="kode_barang"
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Nama Barang:</label>
+                    <div class="col-sm-9">
+                      <input type="text"
+                      nbInput
+                      fullWidth
+                      placeholder="Nama Barang"
+                      [(ngModel)]="nama_barang"
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Warna:</label>
+                    <div class="col-sm-9">
+                      <input type="text"
+                      nbInput
+                      fullWidth
+                      placeholder="Warna"
+                      [(ngModel)]="warna"
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Harga Beli:</label>
+                    <div class="col-sm-9">
+                      <input type="text"
+                      nbInput
+                      fullWidth
+                      placeholder="Harga Beli"
+                      [(ngModel)]="harga_beli"
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Harga Minimum:</label>
+                    <div class="col-sm-9">
+                      <input type="text"
+                        nbInput
+                        fullWidth
+                        placeholder="Harga Minimum"
+                        [(ngModel)]="harga_minimum"
+                        >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Kelompok:</label>
+                    <div class="col-sm-9">
+                      <nb-select placeholder="Pilih Kelompok" [(ngModel)]="kelompok_data">
+                        <nb-option *ngFor="let kelompok of Kelompok" value="{{kelompok._id}}">{{kelompok.nama_kelompok}}</nb-option>
+                      </nb-select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Stok:</label>
+                    <div class="col-sm-9">
+                      <input type="text"
+                      nbInput
+                      fullWidth
+                      placeholder="Stok"
+                      [(ngModel)]="stok"
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Kode Barcode:</label>
+                    <div class="col-sm-9">
+                      <input type="text"
+                      nbInput
+                      fullWidth
+                      placeholder="Kode Barcode Varian"
+                      [(ngModel)]="kode_barcode"
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Hitungan:</label>
+                    <div class="col-sm-9">
+                      <input type="text"
+                      nbInput
+                      fullWidth
+                      placeholder="Hitungan"
+                      [(ngModel)]="hitungan"
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Harga Jual:</label>
+                    <div class="col-sm-9">
+                      <input type="text"
+                      nbInput
+                      fullWidth
+                      placeholder="Harga Jual"
+                      [(ngModel)]="harga_jual"
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Diskon Rupiah:</label>
+                    <div class="col-sm-9">
+                      <input type="text"
+                      nbInput
+                      fullWidth
+                      placeholder="Diskon Rupiah"
+                      [(ngModel)]="diskon"
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Presentase Bonus:</label>
+                    <div class="col-sm-9">
+                      <input type="text"
+                      nbInput
+                      fullWidth
+                      placeholder="Presentase Bonus"
+                      [(ngModel)]="presentase_bonus"
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label">Satuan:</label>
+                    <div class="col-sm-9">
+                      <nb-select placeholder="Pilih Satuan" [(ngModel)]="satuan_data">
+                        <nb-option *ngFor="let satuan of Satuan" value="{{satuan._id}}">{{satuan.nama_satuan}}</nb-option>
+                      </nb-select>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </nb-tab>
+          <nb-tab tabTitle="Harga Per Qty">
+            <table  class="table">
+                <thead >
+                  <tr>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody  *ngIf="beliBarangUi.length <= 0">
+                  <tr id="datakosong" >
+                    <td colspan="3" style="text-align: center; font-weight: bold;">Data Kosong</td>
+                  </tr>
+                </tbody>
+                <tbody *ngFor="let bb of beliBarangUi; let ik = index;">
+
+                  <tr  *ngFor="let bbb of bb?.barang; let i = index;">
+                    <td >
+                        <input type='number' nbInput [(ngModel)]="bbb.jumlah"/>
+                    </td>
+                    <td >
+                      <input type='number' nbInput [(ngModel)]="bbb.harga"/>
+                    </td>
+                    <td >
+                      <div class="hapus" (click)="hapusBarang(ik)"><nb-icon icon="trash-2-outline"></nb-icon></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="alert alert-info TotalBayar">
+              <table width="100%">
+                  <tr >
+                      <td width="60%"><button type="button" (click)="tambahBeli()" class="btn btn-success pull-left"> Baris Baru</button>
+                      </td>
+
+                  </tr>
+
+              </table>
+            </div>
+          </nb-tab>
+          <nb-tab tabTitle="Harga Qty Campuran">
+            <table  class="table">
+                <thead >
+                  <tr>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody  *ngIf="beliCampuranUi.length <= 0">
+                  <tr id="datakosong" >
+                    <td colspan="3" style="text-align: center; font-weight: bold;">Data Kosong</td>
+                  </tr>
+                </tbody>
+                <tbody *ngFor="let cc of beliCampuranUi; let ik = index;">
+
+                  <tr  *ngFor="let ccc of cc?.barang_campuran; let i = index;">
+                    <td >
+                        <input type='number' nbInput [(ngModel)]="ccc.qty"/>
+                    </td>
+                    <td >
+                        <input type='number' nbInput [(ngModel)]="ccc.harga_jual_campuran"/>
+                    </td>
+                    <td >
+                      <div class="hapus" (click)="hapusBarangCampuran(ik)"><nb-icon icon="trash-2-outline"></nb-icon></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="alert alert-info TotalBayar">
+              <table width="100%">
+                  <tr >
+                      <td width="60%"><button type="button" (click)="tambahBeliCampuran()" class="btn btn-success pull-left"> Baris Baru</button>
+                      </td>
+
+                  </tr>
+
+              </table>
+            </div>
+          </nb-tab>
+          <nb-tab tabTitle="Harga Pelanggan">
+            <table  class="table">
+                <thead >
+                  <tr>
+                    <th scope="col">Pelanggan</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody  *ngIf="beliPelangganUi.length <= 0">
+                  <tr id="datakosong" >
+                    <td colspan="3" style="text-align: center; font-weight: bold;">Data Kosong</td>
+                  </tr>
+                </tbody>
+                <tbody *ngFor="let dd of beliPelangganUi; let ik = index;">
+
+                  <tr  *ngFor="let ddd of dd?.barang_pelanggan; let i = index;">
+                    <td >
+                        <input type='text' nbInput  [value]="pelanggane?.nama_pelanggan? pelanggane?.nama_pelanggan : '-'" style="color: #000;" (click)="openModalPelangan()"/>
+                        <input type='hidden' [(ngModel)]="ddd.kode_pelanggan" [value]="pelanggane?.kode_pelanggan? pelanggane?.kode_pelanggan : '-'">
+                        <input type='hidden' [(ngModel)]="ddd.id_uniq_pelanggan" [value]="pelanggane?.id_uniq_pelanggan? pelanggane?.id_uniq_pelanggan : '-'">
+                    </td>
+                    <td >
+                        <input type='number' nbInput [(ngModel)]="ddd.harga_jual_pelanggan"/>
+                    </td>
+                    <td >
+                      <div class="hapus" (click)="hapusBarangPelanggan(ik)"><nb-icon icon="trash-2-outline"></nb-icon></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="alert alert-info TotalBayar">
+              <table width="100%">
+                  <tr >
+                      <td width="60%"><button type="button" (click)="tambahBeliPelanggan()" class="btn btn-success pull-left"> Baris Baru</button>
+                      </td>
+
+                  </tr>
+
+              </table>
+            </div>
+          </nb-tab>
+        </nb-tabset>
+
+         <br /><br />
+
+          <!-- <button nbButton
+                status="primary"
+                size="large"
+                (click)="simpan()"
+                [nbSpinner]="simpanLoading"
+                nbSpinnerStatus="danger"
+                nbSpinnerSize="large"
+                nbSpinnerMessage="Loading...."
+                >
+          <div *ngIf="!simpanLoading">Simpan </div>
+        </button> -->
+        <button type="button" class="btn btn-info btn-lg btn-block" (click)="simpan()" [nbSpinner]="simpanLoading" nbSpinnerStatus="danger" nbSpinnerSize="large" nbSpinnerMessage="Loading....">Simpan
+
+        </button>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div [ngStyle]="showModalPelanggan? {'opacity': '1'} :  {'opacity': '0', 'z-index' : '-1'}" class="c-modal-pelanggan">
+    <div class="modal">
+      <div class="title">Pilih Pelanggan</div>
+      <div class="c-cari">
+        <div style="padding-left: 0px;background: #f1f6ff;border-radius: 10px;">
+          <input nbInput fullWidth (change)="cariPelanggan()" [(ngModel)]="textCariPelanggan" placeholder="Cari pelanggan" style="width: 203%;">
+        </div>
+        <!-- <div class="tambah-pelanggan" (click)="modalTambahPelanggan()">
+          <ion-icon name="person-add"></ion-icon>
+        </div> -->
+      </div>
+      <div class="content">
+        <div>
+          <input type="radio" id="P-0" [value]="0" [(ngModel)]="pelangganUi">
+          <label for="P-0">Umum</label>
+        </div>
+        <div *ngFor="let pel of dataPelangganUi">
+          <input type="radio" [id]="'P-' + pel.id_pelanggan" [value]="pel" [(ngModel)]="pelangganUi">
+          <label [for]="'P-' + pel.id_pelanggan">{{pel.kode_pelanggan}} - {{pel.nama_pelanggan}} - <span style="text-transform: uppercase;">{{pel.alamat}}</span></label>
+        </div>
+      </div>
+      <div class="button">
+        <div (click)="modalBatal()">Batal</div>
+        <div (click)="modalPelangganOk()">Ok</div>
+      </div>
+    </div>
+  </div>
+  <div [ngStyle]="showModalPelanggan? {'opacity': '1', 'z-index' : '4'} :  {'opacity': '0', 'z-index' : '-1'}" class="modal-pelanggan-backdrop" (click)="modalBatal()"></div>
+</div>

@@ -1,0 +1,60 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-body>
+        <span class="edit" [routerLink]="['/pages/barang/inputs/']">
+          <button nbButton>Tambah</button>
+        </span><br /><br />
+        <nb-alert status="danger" *ngIf="Barang.length <= 0" class="no-data text-center">
+          Data Barang Kosong!!!!
+        </nb-alert>
+
+  <!-- Employee list -->
+        <table datatable class="row-border hover" *ngIf="Barang.length > 0">
+          <thead >
+            <tr>
+              <th scope="col">Kode Barang</th>
+              <th scope="col">Nama Kelompok</th>
+              <th scope="col">Nama Satuan</th>
+              <th scope="col">Kode Barcode</th>
+              <th scope="col">Nama Barang</th>
+              <th scope="col">Hitungan</th>
+              <th scope="col">Warna</th>
+              <th scope="col">Harga Jual</th>
+              <th scope="col">Harga Beli</th>
+              <th scope="col">Diskon Rupiah</th>
+              <th scope="col">Harga Minimum</th>
+              <th scope="col">Presentase Bonus</th>
+              <th scope="col center">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let barang of Barang; let i = index">
+              <td>{{barang.kode_barang}}</td>
+              <td>{{barang.kode_kelompok.nama_kelompok}}</td>
+              <td>{{barang.kode_satuan.nama_satuan}}</td>
+              <td>{{barang.kode_barcode_varian}}</td>
+              <td>{{barang.nama_barang}}</td>
+              <td>{{barang.hitungan}}</td>
+              <td>{{barang.warna}}</td>
+              <td>{{barang.harga_jual}}</td>
+              <td>{{barang.harga_beli}}</td>
+              <td>{{barang.diskon_rupiah}}</td>
+              <td>{{barang.harga_minimum}}</td>
+              <td>{{barang.presentase_bonus}}</td>
+              <td class="text-center edit-block">
+                <span class="edit" [routerLink]="['/pages/barang/edit-supplier/', barang._id]">
+                  <button type="button" class="btn btn-success btn-sm">Edit</button>
+                </span>
+                <span class="delete" (click)="removeBarang(barang, i)">
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-body>
+        <span class="edit" [routerLink]="['/pages/top/inputs/']">
+          <button nbButton>Tambah</button>
+        </span><br /><br />
+        <nb-alert status="danger" *ngIf="Top.length <= 0" class="no-data text-center">
+          Data T.O.P Kosong!!!!
+        </nb-alert>
+
+  <!-- Employee list -->
+        <table datatable class="row-border hover" *ngIf="Top.length > 0">
+          <thead >
+            <tr>
+              <th scope="col">Top ID</th>
+              <th scope="col">Kode Top</th>
+              <th scope="col">Top</th>
+              <th scope="col center">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let top of Top; let i = index">
+              <th scope="row">{{top._id}}</th>
+              <td>{{top.kode_top}}</td>
+              <td>{{top.nama_top}}</td>
+              <td class="text-center edit-block">
+                <span class="edit" [routerLink]="['/pages/top/edit-top/', top._id]">
+                  <button type="button" class="btn btn-success btn-sm">Edit</button>
+                </span>
+                <span class="delete" (click)="removeTop(top, i)">
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
